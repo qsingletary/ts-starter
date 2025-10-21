@@ -7,27 +7,26 @@ on:
 
 jobs:
   build:
-    name: Build, Lint & Typecheck
     runs-on: ubuntu-latest
     env:
       CI: true
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node version from .nvmrc
+      - name: Setup Node via .nvmrc (uses Corepack-compatible Node)
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
+          check-latest: true
           cache: 'yarn'
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Activate Yarn version from package.json
-        run: corepack prepare $(jq -r '.packageManager' package.json) --activate
-        shell: bash
+      - name: Use Yarn version defined in package.json
+        run: corepack prepare $(node -p "require('./package.json').packageManager") --activate
 
       - name: Verify Yarn version
         run: yarn --version
