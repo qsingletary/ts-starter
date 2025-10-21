@@ -21,4 +21,4 @@ dist/
 !.yarn/patches
 !.yarn/sdks
 # Misc
-.DS_Store
+.DS_Storedist/
