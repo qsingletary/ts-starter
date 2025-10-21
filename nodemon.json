@@ -1,0 +1,6 @@
+{
+  "watch": ["src", ".env"],
+  "ext": "ts,js,json",
+  "exec": "ts-node --project tsconfig.json src/index.ts",
+  "env": {}
+}
